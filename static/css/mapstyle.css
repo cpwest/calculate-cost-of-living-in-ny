@@ -1,0 +1,18 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#mapid {
+  height: 500px;
+  width: 700px;
+}
+
+body,
+html {
+  height: 70%;
+}
+
+ul, li {
+  list-style: none;
+}

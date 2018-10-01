@@ -34,7 +34,7 @@ Base.prepare(db.engine, reflect=True)
 
 # Save references to each table
 wages = Base.classes.wages
-# zillowRentData = Base.classes.rent
+zillowRentData = Base.classes.rent
 
 
 @app.route("/")
@@ -99,7 +99,11 @@ def neighborhoods_data():
         zillowRentData.field101, #most recent mean rent
     ]
     nycNeighborhoods = db.session.query(*sel).filter(zillowRentData.field3 == "New York").all()
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a48fe165544a47099f4cbb200aef517d9717730d
     print(nycNeighborhoods)
     return jsonify(nycNeighborhoods)
 
@@ -113,9 +117,15 @@ def hood_data(name):
         zillowRentData.field4, #state
         zillowRentData.field101, #most recent mean rent
     ]
+<<<<<<< HEAD
 
     nycNeighborhoods = db.session.query(*sel).filter(zillowRentData.field3 == "New York").filter(zillowRentData.field2 == name).all()
 
+=======
+    
+    nycNeighborhoods = db.session.query(*sel).filter(zillowRentData.field3 == "New York").filter(zillowRentData.field2 == name).all()
+    
+>>>>>>> a48fe165544a47099f4cbb200aef517d9717730d
     # create dictionary entry for each row of neighborhood info
     neighborhood_data = {}
 
@@ -124,7 +134,11 @@ def hood_data(name):
         neighborhood_data["City"] = result[1]
         neighborhood_data["State"] = result[2]
         neighborhood_data["MeanRent"] = result[3]
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> a48fe165544a47099f4cbb200aef517d9717730d
     print(neighborhood_data)
     return jsonify(neighborhood_data)
 
