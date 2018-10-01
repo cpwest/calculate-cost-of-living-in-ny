@@ -42,6 +42,11 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
+@app.route("/map")
+def map():
+    """Return the homepage."""
+    return render_template("map.html")
+
 # Returns json list of all professions from database
 # Information is returned from title column of wages table
 @app.route("/professions")
@@ -83,6 +88,45 @@ def wages_profession(profession):
         "Experienced": sample_data['Experienced'].values[0]
     }
     return jsonify(data)
+
+@app.route("/neighborhoods")
+def neighborhoods_data():
+    """Return all neighborhoods and mean rents for NYC"""
+    sel = [
+        zillowRentData.field2, #neighborhood
+        zillowRentData.field3, #city
+        zillowRentData.field4, #state
+        zillowRentData.field101, #most recent mean rent
+    ]
+    nycNeighborhoods = db.session.query(*sel).filter(zillowRentData.field3 == "New York").all()
+
+    print(nycNeighborhoods)
+    return jsonify(nycNeighborhoods)
+
+
+@app.route("/neighborhoods/<name>")
+def hood_data(name):
+    """Return mean rent for a neighborhood"""
+    sel = [
+        zillowRentData.field2, #neighborhood
+        zillowRentData.field3, #city
+        zillowRentData.field4, #state
+        zillowRentData.field101, #most recent mean rent
+    ]
+
+    nycNeighborhoods = db.session.query(*sel).filter(zillowRentData.field3 == "New York").filter(zillowRentData.field2 == name).all()
+
+    # create dictionary entry for each row of neighborhood info
+    neighborhood_data = {}
+
+    for result in nycNeighborhoods:
+        neighborhood_data["Neighborhood"] = result[0]
+        neighborhood_data["City"] = result[1]
+        neighborhood_data["State"] = result[2]
+        neighborhood_data["MeanRent"] = result[3]
+
+    print(neighborhood_data)
+    return jsonify(neighborhood_data)
 
 
 if __name__ == "__main__":
