@@ -22,8 +22,7 @@ app = Flask(__name__, static_url_path='/static')
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db/data.sqlite"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS "] = True
 
-
-engine = create_engine("sqlite:///db/data.sqlite", echo = False)
+engine = create_engine("sqlite:///db/data.sqlite", echo=False)
 
 db = SQLAlchemy(app)
 
@@ -34,7 +33,7 @@ Base.prepare(db.engine, reflect=True)
 
 # Save references to each table
 wages = Base.classes.wages
-zillowRentData = Base.classes.rent
+rent = Base.classes.rent
 
 
 @app.route("/")
@@ -42,10 +41,12 @@ def index():
     """Return the homepage."""
     return render_template("index.html")
 
+
 @app.route("/map")
 def map():
     """Return the homepage."""
     return render_template("map.html")
+
 
 # Returns json list of all professions from database
 # Information is returned from title column of wages table
@@ -74,7 +75,7 @@ def wages_profession(profession):
                                                      "Mean",
                                                      "Median",
                                                      "Entry",
-                                                     "Experienced" ]]
+                                                     "Experienced"]]
     if sample_data.empty:
         return jsonify({})
 
@@ -89,48 +90,65 @@ def wages_profession(profession):
     }
     return jsonify(data)
 
+
 @app.route("/neighborhoods")
 def neighborhoods_data():
-    """Return all neighborhoods and mean rents for NYC"""
-    sel = [
-        zillowRentData.field2, #neighborhood
-        zillowRentData.field3, #city
-        zillowRentData.field4, #state
-        zillowRentData.field101, #most recent mean rent
-    ]
-    nycNeighborhoods = db.session.query(*sel).filter(zillowRentData.field3 == "New York").all()
+    stmt = db.session.query(rent).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    sample_data = df.loc[df['City'] == "New York", ["RegionName",
+                                                    "CountyName",
+                                                    "SizeRank"]]
+    if sample_data.empty:
+        return jsonify({})
 
-    print(nycNeighborhoods)
-    return jsonify(nycNeighborhoods)
+    # Format the data to send as json
+    data = {
+        "RegionName": sample_data['RegionName'].values.tolist(),
+        "County": sample_data['CountyName'].values.tolist(),
+        "Size": sample_data['SizeRank'].values.tolist()
+    }
+    return jsonify(data)
+    # return jsonify(nycNeighborhoods)
 
 
 @app.route("/neighborhoods/<name>")
 def hood_data(name):
-    """Return mean rent for a neighborhood"""
-    sel = [
-        zillowRentData.field2, #neighborhood
-        zillowRentData.field3, #city
-        zillowRentData.field4, #state
-        zillowRentData.field101, #most recent mean rent
-    ]
+    # """Return mean rent for a neighborhood"""
+    # sel = [
+    #     rent.RegionName,  # neighborhood
+    #     rent.City,  # city
+    #     rent.State,  # state
+    #     rent.Aug2018  # most recent mean rent
+    # ]
+    #
+    # sample_data = db.session.query(*sel).filter(rent.City == "New York").filter(rent.RegionName == name).all()
+    # # create dictionary entry for each row of neighborhood info
+    # neighborhood_data = {}
+    #
+    # for result in nycNeighborhoods:
+    #     neighborhood_data["RegionName"] = result[0]
+    #     neighborhood_data["City"] = result[1]
+    #     neighborhood_data["State"] = result[2]
+    #     neighborhood_data["Aug2018"] = result[3]
+    # print(neighborhood_data)
 
-    
-    nycNeighborhoods = db.session.query(*sel).filter(zillowRentData.field3 == "New York").filter(zillowRentData.field2 == name).all()
+    stmt = db.session.query(rent).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    sample_data = df.loc[df['RegionName'] == name, ["RegionName",
+                                                    "City",
+                                                    "State",
+                                                    "Aug2018"]]
 
-    # create dictionary entry for each row of neighborhood info
-    neighborhood_data = {}
+    data = {
+        "RegionName": sample_data['RegionName'].values.tolist()[0],
+        "City": sample_data['City'].values.tolist()[0],
+        "State": sample_data['State'].values.tolist()[0],
+        "Aug2018": sample_data['Aug2018'].values.tolist()[0]
+    }
 
-    for result in nycNeighborhoods:
-        neighborhood_data["Neighborhood"] = result[0]
-        neighborhood_data["City"] = result[1]
-        neighborhood_data["State"] = result[2]
-        neighborhood_data["MeanRent"] = result[3]
-
-
-    print(neighborhood_data)
-    return jsonify(neighborhood_data)
+    return jsonify(data)
 
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT',5000))
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='127.0.0.1', port=5000)
