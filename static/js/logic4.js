@@ -35,25 +35,42 @@ function chooseColor(borough) {
   }
 }
 
+var Carlos = [];
 
 function getMeanRent(neighborhood){
-
   var url = "/neighborhoods/" + neighborhood;
   d3.json(url, function (response) {
-      
-      response.slice(1,3);
-      console.log(response);
-      console.log(response.MeanRent);
-      return response.MeanRent;
+    var neigh = response.Neighborhood;
+    var result = {Neighborhood : response.Neighborhood, MeanRent: response.MeanRent};
+      // console.log(response);
+
+    // return response.getMeanRent;
+      // console.log(response);
+      // console.log(response.MeanRent);
+    Carlos.push(result);
+    // console.log(Carlos);
+    
+      // console.log(renting);
   });
+  // return result;
 }
+var renting = {}
 
 // Grabbing our GeoJSON data..
 d3.json(link, function(data) {
+  console.log(Carlos);
+  for (let i = 0; i < data.length; i++) {
+    console.log(data[i]);
+    for (let j = 0; j < Carlos.length; j++) {
+      // console.log(Carlos[j]);
+    }
+  }
+
   // Creating a geoJSON layer with the retrieved data
   L.geoJson(data, {
     // Style each feature (in this case a neighborhood)
     style: function(feature) {
+      console.log(feature);
       return {
         color: "white",
         // Call the chooseColor function to decide which color to color our neighborhood (color based on borough)
@@ -86,14 +103,44 @@ d3.json(link, function(data) {
         }
       });
 
-      // var meanRent = getMeanRent(feature.properties.neighborhood)
+      // function getMeanRent(neighborhood){
+
+      //   var url = "/neighborhoods/" + neighborhood;
+      //   d3.json(url, function (response) {
+            
+          
+      //       console.log(response);
+      //       console.log(response.MeanRent);
+      //       var renting = response.MeanRent
+            
+      //   });
+      // }
+
+      function printMeanRent(obj, neigh){
+        // console.log(obj);
+        for (c of obj){
+          if (c.Neighborhood == neigh){
+            return c.MeanRent;
+          }
+        }
+      }
+      // var Cath = getMeanRent(feature.properties.neighborhood);
+      // console.log(Cath);
+      getMeanRent(feature.properties.neighborhood);
+      // console.log(Carlos);
+
+      // var renting = getMeanRent(feature.properties.neighborhood)
 
       // Giving each feature a pop-up with information pertinent to it
-      layer.bindPopup("<h1>" + feature.properties.neighborhood + "</h1> <hr> <h2>" + getMeanRent(feature.properties.neighborhood) + "</h2> <hr> <h2>" + feature.properties.borough + "</h2>");
+      setTimeout(function(){
+
+        layer.bindPopup("<h1>" + feature.properties.neighborhood + "</h1> <hr> <h2>" + printMeanRent(Carlos, feature.properties.neighborhood)+ "</h2> <hr> <h2>" + feature.properties.borough + "</h2>");
+      },1000);
 
     }
   }).addTo(map);
 });
+
 
 // CODE for Drop Down menu -- NOT WORKING 
 // SOURCE https://github.com/ahalota/Leaflet.CountrySelect/
@@ -154,3 +201,7 @@ d3.json(link, function(data) {
 // L.ProfessionSelect = function(id,options){
 // 	return new L.ProfessionSelect(id,options);
 // };
+
+setTimeout(function(){
+  console.log(Carlos);
+}, 3000);
