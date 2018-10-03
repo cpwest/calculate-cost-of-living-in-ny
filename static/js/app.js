@@ -1,5 +1,5 @@
 function fetchProfessions(){
-    var url = "/professions;
+    var url = "/professions";
     d3.json(url).then(function (data) {
         console.log("Data", data);
         // Update drop down list

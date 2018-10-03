@@ -1,4 +1,8 @@
+
+
 function wagesAfterTax(wages) {
+    for (var i = 0; wages = wages.Mean; i++);
+    return i;
 
 }
 
