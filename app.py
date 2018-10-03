@@ -111,6 +111,8 @@ def neighborhoods_data():
     # return jsonify(nycNeighborhoods)
 
 
+
+
 @app.route("/neighborhoods/<name>")
 def hood_data(name):
     # """Return mean rent for a neighborhood"""

@@ -205,3 +205,4 @@ d3.json(link, function(data) {
 setTimeout(function(){
   console.log(Carlos);
 }, 3000);
+
