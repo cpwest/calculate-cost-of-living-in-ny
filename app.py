@@ -24,10 +24,13 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS "] = True
 
 engine = create_engine("sqlite:///db/data.sqlite", echo=False)
 
+# graph1Plot = Markup(graph1Plot)
+
 db = SQLAlchemy(app)
 
 # reflect an existing database into a new model
 Base = automap_base()
+
 # reflect the tables
 Base.prepare(db.engine, reflect=True)
 
@@ -48,59 +51,26 @@ def dashboard():
     return render_template("dashboard.html")
 
 @app.route("/bar")
-def bar():
-    stmt = db.session.query(wages).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
-    sample_data = df.loc[df['Title'] == ]
+def bar_page():
     return render_template("bar.html")
 
-
-@app.route("/line")
-def line():
-    # Retrieve median income for profession from database
-    stmt = db.session.query(rent).statement
-    df = pd.read_sql_query(stmt, db.session.bind)
-    sample_data = df.loc[df['City'] == profession, ["City",
-                                                    "Jan2011",
-                                                    "Jan2012",
-                                                    "Jan2013",
-                                                    "Jan2014",
-                                                    "Jan2015",
-                                                    "Jan2016",
-                                                    "Jan2017",
-                                                    "Jan2018"]]
-
-    print(df)
-    # Create a dictionary
-    data = {
-        "City": sample_data['City'].values[0],
-        "Jan2011": sample_data['Jan2011'].values[0],
-        "Jan2012": sample_data['Jan2012'].values[0],
-        "Jan2013": sample_data['Jan2013'].values[0],
-        "Jan2014": sample_data['Jan2014'].values[0],
-        "Jan2015": sample_data['Jan2015'].values[0],
-        "Jan2016": sample_data['Jan2016'].values[0],
-        "Jan2017": sample_data['Jan2017'].values[0],
-        "Jan2018": sample_data['Jan2018'].values[0]
-    }
-
-    return jsonify(data)
-    return render_template("line.html")
 
 
 # Returns json list of all professions from database
 # Information is returned from title column of wages table
 @app.route("/professions")
-def professions():
+def professions_data():
     # Retrieve median income for profession from database
     stmt = db.session.query(wages).statement
     df = pd.read_sql_query(stmt, db.session.bind)
 
     print(df)
+
     # Create a dictionary
     data = {
         "professions": df["Title"].values.tolist()
     }
+
     return jsonify(data)
 
 
@@ -132,6 +102,42 @@ def wages_profession(profession):
     return jsonify(data)
 
 
+
+#
+# @app.route("/line")
+# def line():
+#     # Retrieve median income for profession from database
+#     stmt = db.session.query(rent).statement
+#     df = pd.read_sql_query(stmt, db.session.bind)
+#     sample_data = df.loc[df['City'] == , ["City",
+#                                                     "Jan2011",
+#                                                     "Jan2012",
+#                                                     "Jan2013",
+#                                                     "Jan2014",
+#                                                     "Jan2015",
+#                                                     "Jan2016",
+#                                                     "Jan2017",
+#                                                     "Jan2018"]]
+#
+#     print(df)
+#     # Create a dictionary
+#     data = {
+#         "City": sample_data['City'].values[0],
+#         "Jan2011": sample_data['Jan2011'].values[0],
+#         "Jan2012": sample_data['Jan2012'].values[0],
+#         "Jan2013": sample_data['Jan2013'].values[0],
+#         "Jan2014": sample_data['Jan2014'].values[0],
+#         "Jan2015": sample_data['Jan2015'].values[0],
+#         "Jan2016": sample_data['Jan2016'].values[0],
+#         "Jan2017": sample_data['Jan2017'].values[0],
+#         "Jan2018": sample_data['Jan2018'].values[0]
+#     }
+#
+#     return jsonify(data)
+#     return render_template("line.html")
+
+
+
 @app.route("/neighborhoods")
 def neighborhoods_data():
     stmt = db.session.query(rent).statement
@@ -149,31 +155,29 @@ def neighborhoods_data():
         "Size": sample_data['SizeRank'].values.tolist()
     }
     return jsonify(data)
-    # return jsonify(nycNeighborhoods)
-
 
 
 
 @app.route("/neighborhoods/<name>")
 def hood_data(name):
-    # """Return mean rent for a neighborhood"""
-    # sel = [
-    #     rent.RegionName,  # neighborhood
-    #     rent.City,  # city
-    #     rent.State,  # state
-    #     rent.Aug2018  # most recent mean rent
-    # ]
-    #
-    # sample_data = db.session.query(*sel).filter(rent.City == "New York").filter(rent.RegionName == name).all()
-    # # create dictionary entry for each row of neighborhood info
-    # neighborhood_data = {}
-    #
-    # for result in nycNeighborhoods:
-    #     neighborhood_data["RegionName"] = result[0]
-    #     neighborhood_data["City"] = result[1]
-    #     neighborhood_data["State"] = result[2]
-    #     neighborhood_data["Aug2018"] = result[3]
-    # print(neighborhood_data)
+    """Return mean rent for a neighborhood"""
+    sel = [
+        rent.RegionName,  # neighborhood
+        rent.City,  # city
+        rent.State,  # state
+        rent.Aug2018  # most recent mean rent
+    ]
+
+    sample_data = db.session.query(*sel).filter(rent.City == "New York").filter(rent.RegionName == name).all()
+    # create dictionary entry for each row of neighborhood info
+    neighborhood_data = {}
+
+    for result in nycNeighborhoods:
+        neighborhood_data["RegionName"] = result[0]
+        neighborhood_data["City"] = result[1]
+        neighborhood_data["State"] = result[2]
+        neighborhood_data["Aug2018"] = result[3]
+    print(neighborhood_data)
 
     stmt = db.session.query(rent).statement
     df = pd.read_sql_query(stmt, db.session.bind)
@@ -190,6 +194,28 @@ def hood_data(name):
     }
 
     return jsonify(data)
+
+
+
+@app.route("/bar/<profession>")
+def bar(profession):
+    stmt = db.session.query(wages).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    sample_data = df.loc[df['Title'] == profession, ["Title",
+                                                   "Mean"]]
+    if sample_data.empty:
+        return jsonify({})
+
+
+    # Format the data for Plotly
+    plot_trace = {
+        "x": df["Mean"].values.tolist(),
+        "y": df["Title"].values.tolist(),
+        "type": "bar",
+        "orientation": "h"
+    }
+    return jsonify(plot_trace)
+
 
 
 if __name__ == "__main__":

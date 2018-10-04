@@ -1,10 +1,24 @@
 // Plot the default route once the page loads
-var defaultURL = "/data.sqlite";
-d3.json(defaultURL).then(function(data) {
-    var data = [data];
-    var layout = { margin: { t: 30, b: 100 } };
-    Plotly.plot("bar", data, layout);
-});
+
+
+var defaultProfession = "Chief Executives";
+
+
+function plotBarGraph(defaultProfession){
+    console.log("plotBarGraph called...")
+    var url = "/bar/" + defaultProfession;
+    d3.json(url).then(function(data) {
+        var data = [data];
+        console.log("bar data", data);
+
+        var layout = { margin: { t: 30, b: 100 } };
+        Plotly.plot("bar", data, layout);
+    });
+}
+
+
+plotBarGraph(defaultProfession);
+
 
 // Update the plot with new data
 function updatePlotly(newdata) {
