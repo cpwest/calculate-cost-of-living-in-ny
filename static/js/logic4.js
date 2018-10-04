@@ -49,7 +49,7 @@ function getMeanRent(neighborhood){
       // console.log(response.MeanRent);
     Carlos.push(result);
     // console.log(Carlos);
-    
+
       // console.log(renting);
   });
   // return result;
@@ -58,7 +58,7 @@ var renting = {}
 
 // Grabbing our GeoJSON data..
 d3.json(link, function(data) {
-  console.log(Carlos);
+  // console.log(Carlos);
   for (let i = 0; i < data.length; i++) {
     console.log(data[i]);
     for (let j = 0; j < Carlos.length; j++) {
@@ -107,12 +107,12 @@ d3.json(link, function(data) {
 
       //   var url = "/neighborhoods/" + neighborhood;
       //   d3.json(url, function (response) {
-            
-          
+
+
       //       console.log(response);
       //       console.log(response.MeanRent);
       //       var renting = response.MeanRent
-            
+
       //   });
       // }
 
@@ -142,11 +142,11 @@ d3.json(link, function(data) {
 });
 
 
-// CODE for Drop Down menu -- NOT WORKING 
+// CODE for Drop Down menu -- NOT WORKING
 // SOURCE https://github.com/ahalota/Leaflet.CountrySelect/
 
 // L.ProfessionSelect = {};
-// L.ProfessionSelect.titles = 
+// L.ProfessionSelect.titles =
 
 // L.ProfessionSelect = L.Control.extend({
 // 	options: {
@@ -160,11 +160,11 @@ d3.json(link, function(data) {
 // 		this.div = L.DomUtil.create('div','leaflet-professionselect-container');
 // 		this.select = L.DomUtil.create('select','leaflet-professionselect',this.div);
 // 		var content = '';
-		
+
 // 		if (this.options.title.length > 0 ){
 // 			content += '<option>'+this.options.title+'</option>';
 // 		}
-		
+
 // 		var professions = (Array.isArray(this.options.include) && this.options.include.length > 0) ? this.options.include : this.options.professions;
 
 // 		var professionKeys = Object.keys(professions).sort();
@@ -173,20 +173,20 @@ d3.json(link, function(data) {
 // 				content+='<option>'+professionKeys[i]+'</option>';
 // 			}
 // 		}
-		
+
 // 		this.select.innerHTML = content;
 
 // 		this.select.onmousedown = L.DomEvent.stopPropagation;
-		
+
 // 		return this.div;
 // 	},
 // 	on: function(type,handler){
 // 		if (type == 'change'){
 // 			this.onChange = handler;
-// 			L.DomEvent.addListener(this.select,'change',this._onChange,this);			
+// 			L.DomEvent.addListener(this.select,'change',this._onChange,this);
 // 		} else if (type == 'click'){ //don't need this here probably, but for convenience?
 // 			this.onClick = handler;
-// 			L.DomEvent.addListener(this.select,'click',this.onClick,this);			
+// 			L.DomEvent.addListener(this.select,'click',this.onClick,this);
 // 		} else {
 // 			console.log('ProfessionSelect - cannot handle '+type+' events.')
 // 		}
