@@ -47,9 +47,45 @@ def map():
 def dashboard():
     return render_template("dashboard.html")
 
-@app.route("/plotly")
-def plotly():
-    return render_template("plotly.html")
+@app.route("/bar")
+def bar():
+    stmt = db.session.query(wages).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    sample_data = df.loc[df['Title'] == ]
+    return render_template("bar.html")
+
+
+@app.route("/line")
+def line():
+    # Retrieve median income for profession from database
+    stmt = db.session.query(rent).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    sample_data = df.loc[df['City'] == profession, ["City",
+                                                    "Jan2011",
+                                                    "Jan2012",
+                                                    "Jan2013",
+                                                    "Jan2014",
+                                                    "Jan2015",
+                                                    "Jan2016",
+                                                    "Jan2017",
+                                                    "Jan2018"]]
+
+    print(df)
+    # Create a dictionary
+    data = {
+        "City": sample_data['City'].values[0],
+        "Jan2011": sample_data['Jan2011'].values[0],
+        "Jan2012": sample_data['Jan2012'].values[0],
+        "Jan2013": sample_data['Jan2013'].values[0],
+        "Jan2014": sample_data['Jan2014'].values[0],
+        "Jan2015": sample_data['Jan2015'].values[0],
+        "Jan2016": sample_data['Jan2016'].values[0],
+        "Jan2017": sample_data['Jan2017'].values[0],
+        "Jan2018": sample_data['Jan2018'].values[0]
+    }
+
+    return jsonify(data)
+    return render_template("line.html")
 
 
 # Returns json list of all professions from database
@@ -59,6 +95,7 @@ def professions():
     # Retrieve median income for profession from database
     stmt = db.session.query(wages).statement
     df = pd.read_sql_query(stmt, db.session.bind)
+
     print(df)
     # Create a dictionary
     data = {
