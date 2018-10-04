@@ -201,20 +201,25 @@ def hood_data(name):
 def bar(profession):
     stmt = db.session.query(wages).statement
     df = pd.read_sql_query(stmt, db.session.bind)
+
     sample_data = df.loc[df['Title'] == profession, ["Title",
-                                                   "Mean"]]
+                                                     "Mean",
+                                                     "Entry",
+                                                     "Experienced"]]
     if sample_data.empty:
         return jsonify({})
 
 
-    # Format the data for Plotly
-    plot_trace = {
-        "x": df["Mean"].values.tolist(),
-        "y": df["Title"].values.tolist(),
-        "type": "bar",
-        "orientation": "h"
+
+
+    data = {
+        "Title": sample_data['Title'].values.tolist(),
+        "Mean": sample_data['Mean'].values.tolist(),
+        "Entry": sample_data['Entry'].values.tolist(),
+        "Experienced": sample_data['Experienced'].values.tolist()
     }
-    return jsonify(plot_trace)
+
+    return jsonify(data)
 
 
 
