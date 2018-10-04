@@ -35,17 +35,21 @@ Base.prepare(db.engine, reflect=True)
 wages = Base.classes.wages
 rent = Base.classes.rent
 
-
 @app.route("/")
 def index():
-    """Return the homepage."""
     return render_template("index.html")
-
 
 @app.route("/map")
 def map():
-    """Return the homepage."""
     return render_template("map.html")
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+@app.route("/plotly")
+def plotly():
+    return render_template("plotly.html")
 
 
 # Returns json list of all professions from database

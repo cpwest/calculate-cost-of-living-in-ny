@@ -1,26 +1,26 @@
 
 
 
-// // function buildPieChart() {
-//     d3.json("/professions", function(response) {
-//         console.log(response);
+// function buildPieChart() {
+    d3.json("/professions", function(response) {
+        console.log(response);
 
-//         var pieData = [{
-//             values: response.Employment.slice(2),
-//             labels: response.Title.slice(2),
-//             hovertext: response.Title.slice(2),
-//             hoverinfo: "hovertext",
-//             type: 'pie'
-//           }];
+        // var pieData = [{
+        //     values: response.Employment.slice(2),
+        //     labels: response.Title.slice(2),
+        //     hovertext: response.Title.slice(2),
+        //     hoverinfo: "hovertext",
+        //     type: 'pie'
+        //   }];
           
-//           var pieLayout = {
-//             height: 400,
-//             width: 500
-//           };
+        //   var pieLayout = {
+        //     height: 400,
+        //     width: 500
+        //   };
           
-//           Plotly.newPlot('pie', pieData, pieLayout);
+        //   Plotly.newPlot('pie', pieData, pieLayout);
 
-//     });
+    });
 
 
 
