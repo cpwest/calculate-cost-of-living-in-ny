@@ -48,7 +48,7 @@
                             <!-- <div class="ct-chart" id="dailySalesChart"></div> -->
                             <div class="ct-chart" id="map"></div>
                             <!-- API key for map -->
-                            <script type="text/javascript" src="../static/js/config.js"></script>
+                            <!--<script type="text/javascript" src="../static/js/config.js"></script>-->
                             <!-- map div -->
                             <!-- <div id="map"></div> -->
                         </div>
@@ -421,20 +421,28 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Chartist JS -->
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/chartist.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/bootstrap-notify.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/material-dashboard.js') }}"></script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery-2.2.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery-migrate-1.2.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
+
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery.validate.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
 <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/config.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bar.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/calc.js') }}"></script>
+
 
 <script>
     $(document).ready(function () {

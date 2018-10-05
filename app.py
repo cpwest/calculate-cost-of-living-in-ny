@@ -171,7 +171,6 @@ def bar_chart():
                                                      "Experienced"]]
     if sample_data.empty:
         return jsonify({})
-
     data = {
         "Title": sample_data['Title'].values.tolist(),
         "Mean": sample_data['Mean'].values.tolist(),
@@ -180,6 +179,21 @@ def bar_chart():
     }
     return jsonify(data)
 
+# Zillow.csv code
+zillowfilepath = os.path.join(os.path.dirname(__file__),'db/zillow.csv')
+open_read = open(zillowfilepath,'r')
+page =''
+
+while True:
+    read_data = open_read.readline()
+    page += '<p>%s</p>' % read_data
+    if open_read.readline() == '':
+        break
+
+
+@app.route("/readcsv")
+def read_csv():
+    return page
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

@@ -2,11 +2,12 @@
 
 plotBarGraph(profession);
 
-$(window).resize(function() {
-    setTimeout(function() {
-        plotBarGraph(profession);
-    }, 500);
-});
+// $(window).resize(function() {
+//     setTimeout(function() {
+//         plotBarGraph(profession);
+//     }, 500);
+// });
+
 
 
 function plotBarGraph(profession) {
