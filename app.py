@@ -168,14 +168,18 @@ def bar_chart():
     sample_data = df.loc[df['Title'] == profession, ["Title",
                                                      "Mean",
                                                      "Entry",
-                                                     "Experienced"]]
+                                                     "Experienced",
+                                                     "Employment",
+                                                     "SOCCode"]]
     if sample_data.empty:
         return jsonify({})
     data = {
         "Title": sample_data['Title'].values.tolist(),
         "Mean": sample_data['Mean'].values.tolist(),
         "Entry": sample_data['Entry'].values.tolist(),
-        "Experienced": sample_data['Experienced'].values.tolist()
+        "Experienced": sample_data['Experienced'].values.tolist(),
+        "Employment": sample_data['Employment'].values.tolist(),
+        "SOCCode": sample_data['SOCCode'].values.tolist()
     }
     return jsonify(data)
 

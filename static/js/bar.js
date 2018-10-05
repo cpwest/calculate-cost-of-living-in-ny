@@ -44,8 +44,23 @@ function plotBarGraph(profession) {
                 plot_bgcolor: 'rgba(0,0,0,0)',
 
             };
-
+            updateStats(data);
             Plotly.plot("bar", plot_data, layout);
+
         }
     });
+}
+
+
+function updateStats(data) {
+
+    var div =  d3.select("#numEmployed");
+    div.innerHTML = "";
+    var innerDiv = div.append("div");
+    innerDiv.text(data.Employment[0]);
+
+    var socDiv =  d3.select("#SOCCode");
+    socDiv.innerHTML = "";
+    var socInnerDiv = socDiv.append("div");
+    socInnerDiv.text(data.SOCCode[0]);
 }

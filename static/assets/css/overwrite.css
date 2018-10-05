@@ -1,0 +1,70 @@
+.card [class*="card-header-"] .card-text .card-title {
+    color: #fbf9ff;
+    margin-top: 0;
+}
+
+.card [class*="card-header-"] .ct-chart .card-title {
+    color: #fbf9ff;
+}
+
+div {
+    color: #fbf9ff;
+}
+
+table {
+    color: #fbf9ff;
+}
+
+tr td {
+    color: #fbf9ff;
+}
+
+body {
+    color: #fbf9ff;
+}
+
+
+
+.card [class*="card-header-"] .ct-chart .card-category {
+    margin-bottom: 0;
+    color: #fbf9ff;
+}
+
+.card [class*="card-header-"] .ct-chart .ct-label {
+    color: #fbf9ff;
+}
+
+.card [class*="card-header-"] .ct-chart .ct-grid {
+    stroke: rgba(255, 255, 255, 0.2);
+}
+
+.card [class*="card-header-"] .ct-chart .ct-series-a .ct-point,
+.card [class*="card-header-"] .ct-chart .ct-series-a .ct-line,
+.card [class*="card-header-"] .ct-chart .ct-series-a .ct-bar,
+.card [class*="card-header-"] .ct-chart .ct-series-a .ct-slice-donut {
+    stroke: #fbf9ff;
+}
+
+.card [class*="card-header-"] .ct-chart .ct-series-a .ct-slice-pie,
+.card [class*="card-header-"] .ct-chart .ct-series-a .ct-area {
+    fill: #fbf9ff;
+}
+
+.dark-edition .table>thead>tr>th, .dark-edition .table>tbody>tr>th, .dark-edition .table>tfoot>tr>th, .dark-edition .table>thead>tr>td, .dark-edition .table>tbody>tr>td, .dark-edition .table>tfoot>tr>td {
+    color: #fbf9ff;
+    border-color: rgba(95, 255, 94, 0.1);
+}
+
+.dark-edition .card-stats .card-header .card-category:not([class*="text-"]) {
+    color: #fbf9ff;
+}
+
+
+.dark-edition .card .card-body .card-category, .dark-edition .card .card-body .card-title {
+    color: #fbf9ff;
+}
+
+
+.dark-edition .card .card-header.card-header-text .card-title, .dark-edition .card .card-header.card-header-icon .card-title {
+    color: #fbf9ff;
+}

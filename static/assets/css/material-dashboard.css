@@ -375,7 +375,7 @@ template {
   }
   pre,
   blockquote {
-    border: 1px solid #999;
+    border: 1px solid #cfcfcf;
     page-break-inside: avoid;
   }
   thead {
@@ -415,11 +415,11 @@ template {
   }
   .table td,
   .table th {
-    background-color: #fff !important;
+    background-color: #ffffff !important;
   }
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #ddd !important;
+    border: 1px solid #e4e4e4 !important;
   }
 }
 
@@ -624,7 +624,7 @@ table {
 caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  color: #6c757d;
+  color: #d9e3eb;
   text-align: left;
   caption-side: bottom;
 }
@@ -922,7 +922,7 @@ mark,
 
 .figure-caption {
   font-size: 90%;
-  color: #6c757d;
+  color: #c4cfd6;
 }
 
 code,
@@ -2050,7 +2050,7 @@ pre code {
 }
 
 .table .thead-light th {
-  color: #495057;
+  color: #585f66;
   background-color: #e9ecef;
   border-color: rgba(0, 0, 0, 0.06);
 }
@@ -8729,7 +8729,7 @@ a.text-light:focus {
 }
 
 .text-dark {
-  color: #343a40 !important;
+  color: #b6bdc3 !important;
 }
 
 a.text-dark:hover,
@@ -8739,7 +8739,7 @@ a.text-dark:focus {
 
 .text-muted,
 .bmd-help {
-  color: #6c757d !important;
+  color: #b2bbc3 !important;
 }
 
 .text-hide {
