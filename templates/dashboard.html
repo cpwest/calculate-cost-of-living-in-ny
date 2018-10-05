@@ -62,13 +62,15 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-12">
-                    <div class="card card-chart">
+                    <div class="card card-chart" >
                         <div class="card-header card-header-warning">
-                            <div class="ct-chart" id="websiteViewsChart"></div>
+                            <div class="ct-chart" id="bar" style="height: 160px;"></div>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">D3 Graph Goes Here</h4>
-                            <p class="card-category">This is a D3 Graph</p>
+                            <h4 class="card-title">{{ profession }}</h4>
+                            <p class="card-category">
+                                The graph shows income by experience
+                            </p>
                         </div>
 
                     </div>
@@ -407,6 +409,10 @@
 <!-- <script type="text/javascript" src="../static/js/config.js"></script> -->
 
 <!--   Core JS Files   -->
+<script>
+    var profession = {{ profession|tojson }};
+    var income = {{ income|tojson }};
+</script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/core/jquery.min.js') }}"></script>
 <script type="text/javascript"
         src="{{ url_for('static', filename='assets/js/bootstrap-material-design.min.js') }}"></script>
@@ -423,6 +429,12 @@
 <script type="text/javascript" src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery.validate.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/bar.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/calc.js') }}"></script>
 
 <script>
     $(document).ready(function () {
