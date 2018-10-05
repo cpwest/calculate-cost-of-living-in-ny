@@ -127,8 +127,10 @@
                             <div class="card-icon">
                                 <i class="material-icons">home</i>
                             </div>
-                            <p class="card-category">Rent Data</p>
-                            <h3 class="card-title">75</h3>
+                            <p class="card-category">Affordable Rent</p>
+                            <h3 class="card-title">
+                                <small><div id="affordableRent"></div></small>
+                            </h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -425,7 +427,9 @@
 
 <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/calc.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bar.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
 
 <!-- additional for bootstrap -->
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/material-dashboard.js') }}"></script>
