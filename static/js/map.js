@@ -107,7 +107,7 @@ var userinputtest = 3000
         }
       });
       // Giving each feature a pop-up with information pertinent to it
-      layer.bindPopup("<h1>" + feature.properties.neighborhood + "</h1> <hr> <h2>" + feature.properties.borough + "</h2>");
+      layer.bindPopup("<h1>" + feature.properties.neighborhood + "</h1> <hr> <h2> monthly rent $" + feature.properties.zillow + "</h2>");
 
     }
   }).addTo(map);

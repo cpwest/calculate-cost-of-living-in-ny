@@ -9,7 +9,6 @@ plotBarGraph(profession);
 // });
 
 
-
 function plotBarGraph(profession) {
     var url = "/barchart?profession=" + profession;
     d3.json(url).then(function (data) {

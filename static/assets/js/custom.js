@@ -380,17 +380,17 @@ $(window).resize(function(){
     responsiveNavigation();
 });
 
-$(window).load(function(){
-    if( $(".one-item-carousel").length ){
-        $(this).css("display", "block");
-        $(".one-item-carousel").owlCarousel({
-            items: 1,
-            nav: true,
-            autoHeight: true,
-            navText: []
-        });
-    }
-});
+// $(window).load(function(){
+//     if( $(".one-item-carousel").length ){
+//         $(this).css("display", "block");
+//         $(".one-item-carousel").owlCarousel({
+//             items: 1,
+//             nav: true,
+//             autoHeight: true,
+//             navText: []
+//         });
+//     }
+// });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Functions

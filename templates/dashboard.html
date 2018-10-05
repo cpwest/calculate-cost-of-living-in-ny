@@ -17,20 +17,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/material-dashboard.css') }}" type="text/css">
-    
+
     <!-- Map CSS Sheet -->
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
     <!-- Leaflet JS & CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
-    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
-    crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
-    
+
     <!-- d3 JavaScript -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    
+
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
 </head>
@@ -45,13 +39,13 @@
                 <div class="col-xl-12 col-lg-12">
                     <div class="card card-chart">
                         <div class="card-header card-header-success">
-                            <!-- <div class="ct-chart" id="dailySalesChart"></div> -->
-                            <div class="ct-chart" id="map"></div>
-                            <!-- API key for map -->
-                            <!--<script type="text/javascript" src="../static/js/config.js"></script>-->
-                            <!-- map div -->
-                            <!-- <div id="map"></div> -->
+
+                            <div>
+                                <iframe src="http://127.0.0.1:5000/map" height="450px" width="100%"></iframe>
+                            </div>
+
                         </div>
+                        <div id="map"></div>
                         <div class="card-body">
                             <h4 class="card-title">The map Goes Here</h4>
                             <p class="card-category">
@@ -62,7 +56,7 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-12">
-                    <div class="card card-chart" >
+                    <div class="card card-chart">
                         <div class="card-header card-header-warning">
                             <div class="ct-chart" id="bar" style="height: 160px;"></div>
                         </div>
@@ -395,20 +389,12 @@
         </div>
     </div>
 
-    <script>
-        const x = new Date().getFullYear();
-        let date = document.getElementById('date');
-        date.innerHTML = '&copy; ' + x + date.innerHTML;
-    </script>
-</div>
-</div>
 
-<!-- Script for map -->
-<script type="text/javascript" src="../static/js/map.js"></script>
-<!-- API key for map -->
-<!-- <script type="text/javascript" src="../static/js/config.js"></script> -->
+</div>
+</div>
 
 <!--   Core JS Files   -->
+
 <script>
     var profession = {{ profession|tojson }};
     var income = {{ income|tojson }};
@@ -419,29 +405,21 @@
 <script type="text/javascript"
         src="{{ url_for('static', filename='assets/js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Chartist JS -->
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/chartist.min.js') }}"></script>
+<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
 
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/bootstrap-notify.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
-
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/material-dashboard.js') }}"></script>
-
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery-2.2.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery-migrate-1.2.1.min.js') }}"></script>
-
-<script type="text/javascript" src="{{ url_for('static', filename='assets/js/jquery.validate.min.js') }}"></script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
 <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-
-<script type="text/javascript" src="{{ url_for('static', filename='js/map.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/config.js') }}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bar.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='js/calc.js') }}"></script>
+
+<!-- additional for bootstrap -->
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/material-dashboard.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/jQuery.MultiFile.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/bootstrap-notify.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='assets/js/plugins/chartist.min.js') }}"></script>
 
 
 <script>
