@@ -41,18 +41,14 @@
                 <div class="col-xl-12 col-lg-12">
                     <div class="card card-chart">
                         <div class="card-header card-header-success">
-
                             <div>
                                 <iframe src="/map" height="450px" width="100%"></iframe>
                             </div>
-
                         </div>
-                        <div id="map"></div>
                         <div class="card-body">
-                            <h4 class="card-title">The map Goes Here</h4>
+                            <h4 class="card-title">New York City Map</h4>
                             <p class="card-category">
-                                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in
-                                today sales.</p>
+                                <span class="text-success"></span>The map shows areas based on rent.</p>
                         </div>
 
                     </div>
@@ -78,9 +74,8 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">Average Monthly Rent</h4>
-                            <p class="card-category">This graph display average rent for New York</p>
+                            <p class="card-category">This graph shows average rent over time</p>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -93,7 +88,9 @@
                             </div>
                             <p class="card-category">Employed</p>
                             <h3 class="card-title">
-                                <small><div id="numEmployed"></div></small>
+                                <small>
+                                    <div id="numEmployed"></div>
+                                </small>
                             </h3>
                         </div>
                         <div class="card-footer">
@@ -111,7 +108,9 @@
                             </div>
                             <p class="card-category">Occupational Code</p>
                             <h3 class="card-title">
-                                <small><div id="SOCCode"></div></small>
+                                <small>
+                                    <div id="SOCCode"></div>
+                                </small>
                             </h3>
                         </div>
                         <div class="card-footer">
@@ -129,7 +128,9 @@
                             </div>
                             <p class="card-category">Affordable Rent</p>
                             <h3 class="card-title">
-                                <small><div id="affordableRent"></div></small>
+                                <small>
+                                    <div id="affordableRent"></div>
+                                </small>
                             </h3>
                         </div>
                         <div class="card-footer">
@@ -147,7 +148,9 @@
                             </div>
                             <p class="card-category">Income After Tax (24%)</p>
                             <h3 class="card-title">
-                                <small><div id="incomeAfterTax"></div></small>
+                                <small>
+                                    <div id="incomeAfterTax"></div>
+                                </small>
                             </h3>
                         </div>
                         <div class="card-footer">
@@ -352,9 +355,6 @@
                     </div>
 
 
-
-
-
                 </div>
                 <div class="col-lg-6 col-md-12">
 
@@ -367,41 +367,37 @@
                             <table class="table table-hover">
                                 <thead class="text-warning">
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Salary</th>
-                                <th>Country</th>
+                                <th>City</th>
+                                <th>Average Rent</th>
+
                                 </thead>
                                 <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
+                                    <td>Rigefield</td>
+                                    <td>$2,000</td>
+
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>Minerva Hooper</td>
-                                    <td>$23,789</td>
-                                    <td>Curaçao</td>
+                                    <td>Fort Lee</td>
+                                    <td>$1,940</td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>Sage Rodriguez</td>
-                                    <td>$56,142</td>
-                                    <td>Netherlands</td>
+                                    <td>City Island</td>
+                                    <td>$1,872</td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>Philip Chaney</td>
-                                    <td>$38,735</td>
-                                    <td>Korea, South</td>
+                                    <td>North Bergen</td>
+                                    <td>$1,490</td>
                                 </tr>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -412,7 +408,6 @@
 </div>
 
 <!--   Core JS Files   -->
-
 <script>
     var profession = {{ profession|tojson }};
     var income = {{ income|tojson }};
