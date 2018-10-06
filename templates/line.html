@@ -5,7 +5,20 @@
     <title>Line Chart</title>
 </head>
 <body>
-Work in Progress
+
+<div id="lineGraph">
+
+</div>
+
+<!--<select id="selDataset" onchange="getData(this.value)">-->
+    <!--<option value="Jan2016">2016</option>-->
+    <!--<option value="Jan2017">2017</option>-->
+    <!--<option value="Jan2018">2018</option>-->
+<!--</select>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/line.js') }}"></script>
 
 </body>
 </html>

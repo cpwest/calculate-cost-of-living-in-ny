@@ -37,7 +37,7 @@ Base.prepare(db.engine, reflect=True)
 # Save references to each table
 wages = Base.classes.wages
 rent = Base.classes.rent
-
+nycrent = Base.classes.nycrent
 
 @app.route("/")
 def index():
@@ -61,6 +61,11 @@ def bar_page():
     income = request.args.get('income')
     return render_template("bar.html", profession=profession, income=income)
 
+@app.route("/line")
+def line_page():
+    profession = request.args.get('profession')
+    income = request.args.get('income')
+    return render_template("line.html", profession=profession, income=income)
 
 # Returns json list of all professions from database
 # Information is returned from title column of wages table
@@ -156,6 +161,48 @@ def hood_data(name):
         "Aug2018": sample_data['Aug2018'].values.tolist()[0]
     }
 
+    return jsonify(data)
+
+
+@app.route("/linedata")
+def line_data():
+
+    # testing this out
+    stmt = db.session.query(nycrent).statement
+    df = pd.read_sql_query(stmt, db.session.bind)
+    sample_data = df.loc[df['City'] == "New York", ["City",
+                                                    "RegionName",
+                                                    "Jan2017",
+                                                    "Feb2017",
+                                                    "Mar2017",
+                                                    "Apr2017",
+                                                    "May2017",
+                                                    "Jun2017",
+                                                    "Jul2017",
+                                                    "Aug2017",
+                                                    "Sep2017",
+                                                    "Oct2017",
+                                                    "Nov2017",
+                                                    "Dec2017"]]
+    if sample_data.empty:
+        return jsonify({})
+
+    data = {
+        "City": sample_data['City'].values.tolist(),
+        "RegionName": sample_data['RegionName'].values.tolist(),
+        "Jan2017": sample_data['Jan2017'].values.tolist(),
+        "Feb2017": sample_data['Feb2017'].values.tolist(),
+        "Mar2017": sample_data['Mar2017'].values.tolist(),
+        "Apr2017": sample_data['Apr2017'].values.tolist(),
+        "May2017": sample_data['May2017'].values.tolist(),
+        "Jun2017": sample_data['Jun2017'].values.tolist(),
+        "Jul2017": sample_data['Jul2017'].values.tolist(),
+        "Aug2017": sample_data['Aug2017'].values.tolist(),
+        "Sep2017": sample_data['Sep2017'].values.tolist(),
+        "Oct2017": sample_data['Oct2017'].values.tolist(),
+        "Nov2017": sample_data['Nov2017'].values.tolist(),
+        "Dec2017": sample_data['Dec2017'].values.tolist(),
+    }
     return jsonify(data)
 
 

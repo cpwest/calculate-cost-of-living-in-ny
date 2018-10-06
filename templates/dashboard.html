@@ -43,7 +43,7 @@
                         <div class="card-header card-header-success">
 
                             <div>
-                                <iframe src="http://127.0.0.1:5000/map" height="450px" width="100%"></iframe>
+                                <iframe src="/map" height="450px" width="100%"></iframe>
                             </div>
 
                         </div>
@@ -74,11 +74,11 @@
                 <div class="col-xl-6 col-lg-12">
                     <div class="card card-chart">
                         <div class="card-header card-header-danger">
-                            <div class="ct-chart" id="completedTasksChart"></div>
+                            <div class="ct-chart" id="lineGraph" style="height: 160px;"></div>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">D3 Graph Goes Here</h4>
-                            <p class="card-category">This is a D3 Graph</p>
+                            <h4 class="card-title">Average Monthly Rent</h4>
+                            <p class="card-category">This graph display average rent for New York</p>
                         </div>
 
                     </div>
@@ -145,8 +145,10 @@
                             <div class="card-icon">
                                 <i class="material-icons">insert_chart</i>
                             </div>
-                            <p class="card-category">Rent Information</p>
-                            <h3 class="card-title">4</h3>
+                            <p class="card-category">Income After Tax (24%)</p>
+                            <h3 class="card-title">
+                                <small><div id="incomeAfterTax"></div></small>
+                            </h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -430,6 +432,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='js/calc.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/bar.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/line.js') }}"></script>
 
 <!-- additional for bootstrap -->
 <script type="text/javascript" src="{{ url_for('static', filename='assets/js/material-dashboard.js') }}"></script>

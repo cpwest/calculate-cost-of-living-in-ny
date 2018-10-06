@@ -7,6 +7,13 @@ function updateRentStats() {
     div.innerHTML = "";
     var innerDiv = div.append("div");
     innerDiv.text(getAffordableRent(income));
+
+
+    var divIncomeAfterTax =  d3.select("#incomeAfterTax");
+    divIncomeAfterTax.innerHTML = "";
+    var innerDivIncomeAfterTax = divIncomeAfterTax.append("div");
+    innerDivIncomeAfterTax.text(getIncomeAfterTax(income));
+
 }
 
 updateRentStats()
